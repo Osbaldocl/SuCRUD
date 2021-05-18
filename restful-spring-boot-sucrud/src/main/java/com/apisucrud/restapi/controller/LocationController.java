@@ -6,18 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /*
+ * @RestController
  * Tells the system that this is a Spring Rest controller
+ * 
+ * @RequestMapping("/location")
+ * Every time the mapping has this ending, it will call this class
+ * 
+ * LocationController
+ * This class is where API is controlled
  */
 @RestController
-
-/*
- * Every time the mapping has this ending, it will call this class 
- */
 @RequestMapping("/location")
-
-/* This class is where API is controlled
- * 
- */
 public class LocationController {
 	
 	/*
@@ -36,7 +35,6 @@ public class LocationController {
 	 */
 	@PostMapping
 	public String createLocation() {
-		
 		return "Locación creada";
 	}
 }
