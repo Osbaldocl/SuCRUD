@@ -47,9 +47,12 @@ descripción de endpoint:
 definitions:
   Paths:
     description: API para Insertar una sucursal, llamar a una sucursal o buscar la sucursal mas cercana.
+
       basePath:
+
         /Sucursal:
-          get:
+
+          Get:
             description: returns the closest location of a store
             parameters:
               - name: latitud
