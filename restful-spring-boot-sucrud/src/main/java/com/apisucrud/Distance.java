@@ -4,23 +4,31 @@ public class Distance {
 
 	public int id;
 	public String direccion;
-	public float latitud;
-	public float longitud;
+	public double latitud;
+	public double longitud;
 	
-	public float distanceBetweenCurrentLocation;
+	public double distanceBetweenCurrentLocation;
 	
-	public void setData(float latitud, float longitud)
+	public void setData(double latitud, double longitud)
 	{
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
 	
-	public void setData(int id, String direccion, float latitud, float longitud)
+	public void setData(int id, String direccion, double latitud, double longitud)
 	{
 		this.id = id;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
+	}
+	
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public int getId() {
@@ -31,20 +39,20 @@ public class Distance {
 		return direccion;
 	}
 	
-	public float getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 	
-	public float getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 	
-	public void setDistanceBetweenCurrentLocation(float distanceBetweenCurrentLocation)
+	public void setDistanceBetweenCurrentLocation(double distanceBetweenCurrentLocation)
 	{
 		this.distanceBetweenCurrentLocation = distanceBetweenCurrentLocation;
 	}
 	
-	public float getDistanceBetweenCurrentLocation()
+	public double getDistanceBetweenCurrentLocation()
 	{
 		return distanceBetweenCurrentLocation;
 	}

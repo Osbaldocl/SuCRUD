@@ -1,9 +1,14 @@
 package com.apisucrud.restapi.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.apisucrud.Locations;
+import com.apisucrud.DB.ConnectorDB;
 
 /*
  * @RestController
@@ -16,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This class is where API is controlled
  */
 @RestController
-@RequestMapping("/location")
+@RequestMapping("/Sucursal")
 public class LocationController {
 	
 	/*
@@ -24,8 +29,25 @@ public class LocationController {
 	 * getLocation(): with this method returns the closest location of the store
 	 */
 	@GetMapping
-	public String getLocation() {
-		return "Locación obtenida";
+	public String getClosestLocation(float latitude, float longitude) {
+		/// 25.6909,-100.3224
+		Locations sucursalCercana = new Locations(latitude, longitude);
+		try {
+			return sucursalCercana.distance();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error en LocationController.GetClosesLocation: " + e.getMessage());
+		}
+		return "Error";
+	}
+	
+	/*
+	 * @GetMapping: This indicates the system to use this method when it gets a GET request
+	 * getLocation(): with this method returns the specified location by ID
+	 */
+	@GetMapping("/id")
+	public String getSucursalID(int id) {
+		return ConnectorDB.getSpecLocation(id);
 	}
 
 	/*
@@ -34,7 +56,8 @@ public class LocationController {
 	 * 	creation or error message.
 	 */
 	@PostMapping
-	public String createLocation() {
-		return "Locación creada";
+	public String createLocation(String direccion, float latitud, float longitud) {
+		
+		return ConnectorDB.insertLocation(direccion, latitud, longitud);
 	}
 }
