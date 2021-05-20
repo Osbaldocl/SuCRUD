@@ -1,6 +1,5 @@
 package com.apisucrud;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +62,7 @@ public class Locations {
 		return minIndex;
 	}
 
-	public double calculateDistanceBetweenLocations(Distance distanceObj, Distance currentLocation)
+	public static double calculateDistanceBetweenLocations(Distance distanceObj, Distance currentLocation)
 	{
 		double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
 		

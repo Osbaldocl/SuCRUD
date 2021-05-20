@@ -23,41 +23,39 @@ import com.apisucrud.DB.ConnectorDB;
 @RestController
 @RequestMapping("/Sucursal")
 public class LocationController {
-	
+  
 	/*
-	 * @GetMapping: This indicates the system to use this method when it gets a GET request
-	 * getLocation(): with this method returns the closest location of the store
+	 * @GetMapping :This indicates the system to use this method when it gets a GET request
+	 * getLocation() :with this method returns the closest location of the store
 	 */
 	@GetMapping
-	public String getClosestLocation(float latitude, float longitude) {
-		/// 25.6909,-100.3224
-		Locations sucursalCercana = new Locations(latitude, longitude);
+	public String getClosestLocation(float latitud, float longitud) {
+		Locations sucursalCercana = new Locations(latitud, longitud);
 		try {
 			return sucursalCercana.distance();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Error en LocationController.GetClosesLocation: " + e.getMessage());
+			System.out.println("Error en LocationController.GetClosesLocation");
 		}
 		return "Error";
 	}
+  
+	 /*
+	  * @GetMapping :This indicates the system to use this method when it gets a GET request
+	  * getLocation() :with this method returns the specified location by ID
+	  */
+	 @GetMapping("/id")
+	 public String getSucursalID(int id) {
+	   return ConnectorDB.getSpecLocation(id);
+	 }
 	
-	/*
-	 * @GetMapping: This indicates the system to use this method when it gets a GET request
-	 * getLocation(): with this method returns the specified location by ID
-	 */
-	@GetMapping("/id")
-	public String getSucursalID(int id) {
-		return ConnectorDB.getSpecLocation(id);
-	}
-
-	/*
-	 * @GetMapping: This indicates the system to use this method when it gets a POST request
-	 * createLocation(): This method creates a new instance of a store in the DB, returns successful
-	 * 	creation or error message.
-	 */
-	@PostMapping
-	public String createLocation(String direccion, float latitud, float longitud) {
-		
-		return ConnectorDB.insertLocation(direccion, latitud, longitud);
-	}
+	 /*
+	  * @PostMapping :This indicates the system to use this method when it gets a POST request
+	  * createLocation() :This method creates a new instance of a store in the DB, returns successful
+	  *   creation or error message.
+	  */
+	 @PostMapping
+	 public String createLocation(String direccion, float latitud, float longitud) {
+	   return ConnectorDB.insertLocation(direccion, latitud, longitud);
+	 }
 }
