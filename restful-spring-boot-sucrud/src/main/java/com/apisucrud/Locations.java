@@ -6,14 +6,18 @@ import java.util.List;
 
 import com.apisucrud.DB.ConnectorDB;
 
+/*
+ * La clase Locations maneja los objetos tipo distancia y hace los calculos para saber cual Sucursal esta mas cercana
+ */
 public class Locations {
+	
 	
 	Distance currentLocation = new Distance();
 	
 	/* Constructor
-	*
-	*
-	*
+	* @params 
+	* double latitud - latitud que se usa para crear el objeto
+	* double longitud - longitud que se usa para crear el objeto
 	*/
 	public Locations(double latitud, double longitud)
 	{
@@ -26,7 +30,7 @@ public class Locations {
 		List<Distance> distancias = new ArrayList<Distance>();
 		// obtiene el resultSet de todas las locaciones
 		distancias = ConnectorDB.getLocations();
-
+		// Una recursividad para añadir a cada objeto que se creó una distancia entre la ubicación actual y cada sucursal
 		for(int i = 0; i < distancias.size(); i++)
 		{
 			double calculated = calculateDistanceBetweenLocations(distancias.get(i), currentLocation);
@@ -40,6 +44,12 @@ public class Locations {
 		
 	}
 	
+	/*
+	 * @params 
+	 * List<Distance> distancias - se añade la lista de todas las distancias ya calculadas con respecto a la ubicación actual
+	 * 
+	 * returns int - que indica el index donde se encuentra la ubicación mas cercana (indicada por el numero mas cercano a 0)
+	 */
 	private int getLowestDistance(List<Distance> distancias) {
 
         //declare min value as the first element of the list
@@ -62,9 +72,17 @@ public class Locations {
 		return minIndex;
 	}
 
+	/*
+	 * @params 
+	 * Distance distanceObj - Objeto tipo distancia con la distancia en latitud y longitud
+	 * Distance currentLocation - Objeto tipo distancia con la distancia actual en latitud y longitud
+	 * 
+	 * @returns
+	 * double - La distancia en Kilometros. 
+	 */
 	public static double calculateDistanceBetweenLocations(Distance distanceObj, Distance currentLocation)
 	{
-		double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
+		double earthRadius = 6371; // en Kms, cambia a 3958.75 para un output en Millas
 		
 		double currentLat = currentLocation.getLatitud();
 		double currentLon = currentLocation.getLongitud();
@@ -84,7 +102,7 @@ public class Locations {
 
 	    double dist = earthRadius * c;
 	    
-	    return dist * 1.60934; // output distance, in MILES so we multiply by 1.60934 to make it KM
+	    return dist; // output distance, in MILES so we multiply by 1.60934 to make it KM
 	}
 	
 }

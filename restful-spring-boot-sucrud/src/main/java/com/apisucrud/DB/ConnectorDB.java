@@ -12,37 +12,27 @@ import java.util.List;
 import com.apisucrud.Distance;
 
 /*
- * ConnectorDB
+ * ConnectorDB - Clase que utiliza para las conexiones a la base de datos.
  */
 
 public class ConnectorDB {
 	
+		/*
+		 * Datos utilizados para conectarse a la BD
+		 */
 		final static String URL = "jdbc:mysql://localhost:3306/mysql";
 		final static String USERNAME = "root";
 		final static String PASSWORD = "sucrud2021";
 		
-		public void testConnDB() {
-			try {
-				Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				System.out.println("connected to the database!: " + connection.toString());
-				connection.close();
-			}
-			catch(SQLException e) {
-				System.out.println("Error en la conexion");
-				e.printStackTrace();
-			}
-		}
-		
-		//TODO Remove main method
-		public static void main(String[] args) {
-			String direccion = "Blvd Gustavo Díaz Ordaz 333, Sin Nombre de Col 4, La Fama, 66210 San Pedro Garza García, N.L.";
-			float latitud = (float) 25.6704;
-			float longitud = (float) -100.4436;
-			getLocations();
-			//System.out.println(insertLocation(direccion, latitud, longitud));
-		}
-		
-		
+		/*
+		 * getSpecLocation - Se utiliza para obtener la Sucursal especifica por ID
+		 * 
+		 * @params
+		 * int id - Con esto se busca la Sucursal por ID en la BD
+		 * 
+		 * @returns
+		 * String - con los datos de la sucursal.
+		 */
 		public static String getSpecLocation(int id)
 		{
 			Distance sucursal = new Distance();
@@ -73,6 +63,12 @@ public class ConnectorDB {
 					sucursal.getLatitud() + "\nLongitud: " + sucursal.getLongitud();
 		}
 		
+		/*
+		 * getLocations - Se utiliza para obtener todas las Sucursales de la BD
+		 * 
+		 * @returns 
+		 * List<Distance> - Una lista de objetos con todas las Sucursales en la BD 
+		 */
 		public static List<Distance> getLocations()
 		{
 			
@@ -101,13 +97,18 @@ public class ConnectorDB {
 		}
 		
 		
-		
+		/*
+		 * insertLocation - Se utiliza para insertar un nuevo registro de sucursal en la BD
+		 * 
+		 * @params String direccion, float latitud, float longitud - direccion de la sucursal, latitud de la sucursal, longitud de la sucursal.
+		 * 
+		 * @returns String - indicando si se añadió el registro con exito y el ID del registro, si no, un mensaje de error.
+		 */
 		public static String insertLocation(String direccion, float latitud, float longitud)
 		{			
 			String resultado = "No row added";
 			
 			try {
-
 				Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				
 				String sql = "INSERT INTO Sucursales (Direccion, Latitud, Longitud) VALUES (?, ?, ? )";
@@ -134,8 +135,6 @@ public class ConnectorDB {
 			} catch(SQLException e) {
 				System.out.println("Error on ConnectorDB.insertLocation: "+e);
 			}
-			
 			return resultado;
 		}
-		
 }

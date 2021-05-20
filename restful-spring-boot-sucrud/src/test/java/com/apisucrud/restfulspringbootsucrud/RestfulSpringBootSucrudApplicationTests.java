@@ -13,6 +13,10 @@ import com.apisucrud.*;
 
 class RestfulSpringBootSucrudApplicationTests {
 
+	/*
+	 * @Test indica que este es metodo de prueba
+	 * pruebaDeCalculo() :Asegura que hace bien el calculo entre las distancias y que no es Null
+	 */
 	@Test
 	void pruebaDeCalculo() {
 		Distance distancia1 = new Distance();
@@ -25,6 +29,10 @@ class RestfulSpringBootSucrudApplicationTests {
 		assertNotNull(Locations.calculateDistanceBetweenLocations(distancia1, distancia2));
 	}
 	
+	/*
+	 * @Test indica que este es metodo de prueba
+	 * pruebaDistanciaDeSucursalCercana() :Asegura que hace bien todo el proceso desde dar la latitud y longitud hasta recibir la sucursal mas cercana
+	 */
 	@Test
 	 void pruebaDistanciaDeSucursalCercana() throws SQLException {
 		
