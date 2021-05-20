@@ -1,17 +1,11 @@
 {
-  "definitions" : {
-    "Model" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      },
-      "description" : "Description"
-    }
-  },
   "info" : {
-    "version" : "1.0.3"
+    "version" : "1.0.3",
+    "title" : "SuCRUD",
+    "description" : "API created for the challenge of DaCodes",
+    "contact" : {
+      "name" : "Coronado Lopez",
+      "email" : "osbaldo.cl94@gmail.com"
+    }
   }
 }
